@@ -6,7 +6,6 @@ stack_name = "HiChat"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-ndkmaize7qfs"
 s3_prefix = "HiChat"
 region = "ap-south-1"
-profile = "personal"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
