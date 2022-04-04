@@ -5,7 +5,7 @@ on:
       - master
     paths:
       - 'backend/**'
-      - '.github/**'
+      - '.github/main.yml'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -18,9 +18,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
-      - run: |
+      - name: Validate deployment spec
+        run: sam validate
+      - name: Package backend files
+        run: |
           cd backend
           sam build --use-container
-      - run: |
+      - name: Deploy package to AWS
+        run: |
           cd backend
           sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --resolve-s3
