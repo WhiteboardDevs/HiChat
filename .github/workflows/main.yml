@@ -5,7 +5,7 @@ on:
       - master
     paths:
       - 'backend/**'
-      - '.github/main.yml'
+      - '.github/workflows/main.yml'
 jobs:
   deploy:
     runs-on: ubuntu-latest
