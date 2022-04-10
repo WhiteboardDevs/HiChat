@@ -1,0 +1,87 @@
+html, body {
+  background: #000000;
+  font-family: 'Roboto', sans-serif;
+  margin: 0px;
+  padding: 0px;
+  line-height: 1;
+}
+
+.whiteFont {
+  color: #fff;
+}
+
+.grayFont {
+  color: #a2acb4;
+}
+
+.ownMsgBg {
+  color:#8774E1;
+}
+
+.accentBg {
+  background: rgb(33,33,33);
+}
+
+.topBar {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bottomBar {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  left: 0px;
+  bottom: 0px;
+}
+
+.textarea {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  min-height: 30px;
+  z-index: 2;
+  border: none;
+  outline: none;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-bottom: 2px;
+  color: #fff;
+  font-weight: 400;
+  
+}
+
+[contenteditable][data-placeholder]:empty:before{
+  content:attr(data-placeholder);
+  color: #a2acb4;
+  display: block;
+  pointer-events: none;
+}
+
+/* Icons */
+.emoji {
+  position: absolute;
+  bottom: 13px;
+  left: 13px;
+  z-index: 3;
+  font-size: 24px;
+  color: #a2acb4;
+}
+
+.send {
+  position: absolute;
+  bottom: 13px;
+  right: 13px;
+  z-index: 3;
+  font-size: 24px;
+  color: #a2acb4;
+}
+
+/* Icons end */

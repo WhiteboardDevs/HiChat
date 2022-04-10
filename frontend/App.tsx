@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
-  const url = "https://gner4se1je.execute-api.ap-south-1.amazonaws.com/Prod/func1"
+  const url = "http://localhost:3000/func1"
   let [resp, setResp] = useState({});
 
   // useEffect(() => {

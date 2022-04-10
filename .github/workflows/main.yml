@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - 'backend/**'
+      - 'src/backend/**'
       - '.github/workflows/main.yml'
 jobs:
   deploy:
