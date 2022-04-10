@@ -1,3 +1,3 @@
 # HiChat
 
-Chat app
+Chat app by GPR
