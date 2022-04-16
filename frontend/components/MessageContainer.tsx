@@ -17,10 +17,12 @@ type MessageProps = {
 }
 
 const Message = (messageProps: MessageProps) => (
-  <View style={[styles.chatMsgCommon, messageProps.isSelfMsg ? styles.selfMsg: styles.recipientMsg]}>
-    <Text style={messageProps.isSelfMsg ? {} : styles.recipientMsgColor}>{messageProps.messageText}</Text>
+  <View style={[styles.messageWrapper, messageProps.isSelfMsg ? styles.selfMsgWrapper: styles.recipientMsgWrapper]}>
+    <Text style={[messageProps.isSelfMsg ? {} : styles.recipientMsgColor, styles.message]}>{messageProps.messageText}</Text>
     <Text style={[styles.timeStamp, styles.messageStamp]}>11:42 PM</Text>
-    <MaterialIcons name="done" size={12} style={[styles.messageStatus, styles.messageStamp]}/>
+    { messageProps.isSelfMsg &&
+      <MaterialIcons name="done" size={12} style={[styles.messageStatus, styles.messageStamp]}/>
+    }
   </View>
 );
 
@@ -70,43 +72,47 @@ const styles = StyleSheet.create({
   fontStyle: {
     fontFamily: "Lucida Grande"
   },
-  chatMsgCommon: {
+  messageWrapper: {
     display: "flex",
     flexDirection: "row",
     paddingTop: 6,
     paddingLeft: 8,
+    paddingBottom: 6,
     marginVertical: 8,
     marginHorizontal: 16,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
+    maxWidth: "80%",
+    flexWrap: "wrap"
   },
-  recipientMsg: {
+  recipientMsgWrapper: {
     backgroundColor: "#212121",
     alignSelf: "flex-start",
     borderTopRightRadius: 8,
   },
-  selfMsg: {
+  selfMsgWrapper: {
     backgroundColor: "#fff",
     alignSelf: "flex-end", // aligns user messages to the right
-    borderTopLeftRadius: 8,
+    borderTopLeftRadius: 8
+  },
+  message: {
+    paddingRight: 8
   },
   recipientMsgColor: {
     color: "white"
   },
   messageStamp: {
-    marginBottom: 4,
-    color: "#a2acb4"
+    color: "#a2acb4",
+    alignSelf:"flex-end",
+    marginRight: 6
   },
   timeStamp: {
     fontSize: 10,
-    marginLeft: 8,
-    paddingTop: 8
+    marginLeft: "auto"
   },
   messageStatus: {
     fontSize: 14,
-    marginLeft: 2,
     marginRight: 6,
-    paddingTop: 7,
   }
 });
 

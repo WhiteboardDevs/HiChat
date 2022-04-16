@@ -24,8 +24,9 @@ const messages: MessageType[] = [
   },
   {
     id: "3333",
-    message: "I am great as well!",
-    time: 1650081474
+    message: "I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!",
+    time: 1650081474,
+    self: true
   },
 ];
 
