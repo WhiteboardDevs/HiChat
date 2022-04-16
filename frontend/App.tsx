@@ -3,12 +3,11 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 // import { Button } from "react-bootstrap";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SearchContacts } from './components/SearchContacts';
+import { ChatPanel } from './components/ChatPanel';
 
  
 export default function App() {
@@ -29,46 +28,43 @@ export default function App() {
   //     setResp(json);
   //   })
   // })
-
   
-// passing an empty array as second argument triggers the callback in 
-// useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
+  // passing an empty array as second argument triggers the callback in 
+  // useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
 
-useEffect(() => {
-  axios.get(func1_url)
-  .then(response => setFunc1Resp(response.data))
-},[]);
+  useEffect(() => {
+    axios.get(func1_url)
+    .then(response => setFunc1Resp(response.data))
+  },[]);
 
-// useEffect(() => {
-//   axios.get(func2_url)
-//   .then(response => setFunc1Resp(response.data))
-// },[]);
+  // useEffect(() => {
+  //   axios.get(func2_url)
+  //   .then(response => setFunc1Resp(response.data))
+  // },[]);
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="SearchContacts"
-        onPress={() => navigation.navigate('SearchContacts')}
-      />
-    </View>
-  );
-}
+  function HomeScreen({ navigation }) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button
+          title="SearchContacts"
+          onPress={() => navigation.navigate('SearchContacts')}
+        />
+        <Button
+          title="Chat with me"
+          onPress={() => navigation.navigate('ChatPanel')} />
+      </View>
+    );
+  }
 
-function SearchContactsScreen() {
-  return (
-    <SearchContacts/>
-  );
-}
-
-const Stack = createNativeStackNavigator();
+  const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="SearchContacts" component={SearchContactsScreen} />
+        <Stack.Screen name="SearchContacts" component={SearchContacts} />
+        <Stack.Screen name="ChatPanel" component={ChatPanel} />
       </Stack.Navigator>
     </NavigationContainer>
   );
