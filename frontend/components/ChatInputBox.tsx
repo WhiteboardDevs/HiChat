@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import { Platform, StyleSheet, View, TextInput, ViewStyle, Pressable } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-type MessageType = {
-  id: string,
-  message: string,
-  time: number,
-  self?: boolean
-}
 
 type Props = {
   style?: ViewStyle

@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { FlatList, View, Text, ListRenderItemInfo, StyleSheet } from "react-native";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 
 type MessageType = {
@@ -17,7 +18,9 @@ type MessageProps = {
 
 const Message = (messageProps: MessageProps) => (
   <View style={[styles.chatMsgCommon, messageProps.isSelfMsg ? styles.selfMsg: styles.recipientMsg]}>
-    <Text>{messageProps.messageText}</Text>
+    <Text style={messageProps.isSelfMsg ? {} : styles.recipientMsgColor}>{messageProps.messageText}</Text>
+    <Text style={[styles.timeStamp, styles.messageStamp]}>11:42 PM</Text>
+    <MaterialIcons name="done" size={12} style={[styles.messageStatus, styles.messageStamp]}/>
   </View>
 );
 
@@ -65,26 +68,45 @@ class MessageContainer extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   fontStyle: {
-    fontFamily: 'Lucida Grande'
+    fontFamily: "Lucida Grande"
   },
   chatMsgCommon: {
-    padding: 12,
+    display: "flex",
+    flexDirection: "row",
+    paddingTop: 6,
+    paddingLeft: 8,
     marginVertical: 8,
     marginHorizontal: 16,
     borderBottomRightRadius: 8,
-    borderBottomLeftRadius: 8
+    borderBottomLeftRadius: 8,
   },
   recipientMsg: {
-    backgroundColor: "#8774E1",
-    color: "white",
-    alignSelf: 'flex-start',
+    backgroundColor: "#212121",
+    alignSelf: "flex-start",
     borderTopRightRadius: 8,
   },
   selfMsg: {
     backgroundColor: "#fff",
-    color: "black",
-    alignSelf: 'flex-end', // aligns user messages to the right
+    alignSelf: "flex-end", // aligns user messages to the right
     borderTopLeftRadius: 8,
+  },
+  recipientMsgColor: {
+    color: "white"
+  },
+  messageStamp: {
+    marginBottom: 4,
+    color: "#a2acb4"
+  },
+  timeStamp: {
+    fontSize: 10,
+    marginLeft: 8,
+    paddingTop: 8
+  },
+  messageStatus: {
+    fontSize: 14,
+    marginLeft: 2,
+    marginRight: 6,
+    paddingTop: 7,
   }
 });
 
