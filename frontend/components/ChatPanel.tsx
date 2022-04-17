@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 import { ChatInputBox } from "./ChatInputBox";
 import { MessageContainer } from "./MessageContainer";
+import { MessageType } from "./Constants";
 
-type MessageType = {
-  id: string,
-  message: string,
-  time: number,
-  self?: boolean
-}
 
 const messages: MessageType[] = [
   {
@@ -24,9 +19,45 @@ const messages: MessageType[] = [
   },
   {
     id: "3333",
-    message: "I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!I am great as well!",
+    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam diam mauris, facilisis at lorem sed, malesuada placerat turpis. Integer pulvinar arcu erat, vitae malesuada leo accumsan et. In ornare venenatis dolor vel pulvinar. Curabitur finibus feugiat dolor id euismod. Suspendisse vel placerat ligula. Duis a maximus sapien. Duis malesuada, tellus.",
     time: 1650081474,
     self: true
+  },
+  {
+    id: "4444",
+    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam diam mauris, facilisis at lorem sed, malesuada placerat turpis. Integer pulvinar arcu erat, vitae malesuada leo accumsan et. In ornare venenatis dolor vel pulvinar. Curabitur finibus feugiat dolor id euismod. Suspendisse vel placerat ligula. Duis a maximus sapien. Duis malesuada, tellus.",
+    time: 1650081474,
+    self: false
+  },
+  {
+    id: "5555",
+    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam diam mauris, facilisis at lorem sed, malesuada placerat turpis. Integer pulvinar arcu erat, vitae malesuada leo accumsan et. In ornare venenatis dolor vel pulvinar. Curabitur finibus feugiat dolor id euismod. Suspendisse vel placerat ligula. Duis a maximus sapien. Duis malesuada, tellus.",
+    time: 1650081474,
+    self: true
+  },
+  {
+    id: "6666",
+    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam diam mauris, facilisis at lorem sed, malesuada placerat turpis. Integer pulvinar arcu erat, vitae malesuada leo accumsan et. In ornare venenatis dolor vel pulvinar. Curabitur finibus feugiat dolor id euismod. Suspendisse vel placerat ligula. Duis a maximus sapien. Duis malesuada, tellus.",
+    time: 1650081474,
+    self: false
+  },
+  {
+    id: "7",
+    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam diam mauris, facilisis at lorem sed, malesuada placerat turpis. Integer pulvinar arcu erat, vitae malesuada leo accumsan et. In ornare venenatis dolor vel pulvinar. Curabitur finibus feugiat dolor id euismod. Suspendisse vel placerat ligula. Duis a maximus sapien. Duis malesuada, tellus.",
+    time: 1650081474,
+    self: false
+  },
+  {
+    id: "8",
+    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam diam mauris, facilisis at lorem sed, malesuada placerat turpis. Integer pulvinar arcu erat, vitae malesuada leo accumsan et. In ornare venenatis dolor vel pulvinar. Curabitur finibus feugiat dolor id euismod. Suspendisse vel placerat ligula. Duis a maximus sapien. Duis malesuada, tellus.",
+    time: 1650081474,
+    self: false
+  },
+  {
+    id: "9",
+    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam diam mauris, facilisis at lorem sed, malesuada placerat turpis. Integer pulvinar arcu erat, vitae malesuada leo accumsan et. In ornare venenatis dolor vel pulvinar. Curabitur finibus feugiat dolor id euismod. Suspendisse vel placerat ligula. Duis a maximus sapien. Duis malesuada, tellus.",
+    time: 1650081474,
+    self: false
   },
 ];
 
@@ -42,7 +73,7 @@ class ChatPanel extends Component<{}, State> {
     super(props);
     this.state = {
       messages: messages,
-      counter: 4
+      counter: 10
     }
   }
 
