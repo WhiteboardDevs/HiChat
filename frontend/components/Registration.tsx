@@ -5,10 +5,12 @@ import { Picker } from "@react-native-picker/picker";
 import { saveData } from "../services/AsyncStorage";
 
 const STORAGE_KEY = '@save_phone'
+const STORAGE_KEY1 = '@save_user'
   
 type State = {
-  code: string,
+  userName: string,
   phone: string,
+  code: string,
 }
 
 class Registration extends Component<{}, State> {
@@ -16,6 +18,7 @@ class Registration extends Component<{}, State> {
     super(props);
     this.state = {
       code: "",
+      userName: "",
       phone: "",
     }
   }
@@ -23,10 +26,18 @@ class Registration extends Component<{}, State> {
   Register = () => {
     let phone = this.state.phone.replace(/^\s+|\s+$/g, "")
     let code = this.state.code.replace("DEF",'')
-    if (!code || !phone) return;
+    let user = this.state.userName
+    if (!code || !phone || !user) return;
+    
     console.log('Registering User')
+    
     saveData(STORAGE_KEY, code+phone)
+    saveData(STORAGE_KEY1, user)
+    
     console.log(code)
+    console.log(user)
+
+    this.setState({userName: ""})
     this.setState({phone: ""})
     this.setState({code: ""})
   }
@@ -35,7 +46,16 @@ class Registration extends Component<{}, State> {
     return (
       <View style={{backgroundColor: "black", alignItems: "center", height:"100%",width:"100%"}}>
           <Text style={[Regstyles.text,{marginTop: 10, fontSize: 30, color: "white"}]}> User Registration </Text>
-          <View style={[Regstyles.row,{ height: 100,alignItems: 'center', justifyContent: 'center', display:"flex"}]}>
+          <View>
+          <TextInput style={[Regstyles.input,{marginTop: 50,backgroundColor: "white", height: 50, width:340}]}
+                placeholder="User Name"
+                onChange={(event) => { this.setState({ userName: event.nativeEvent.text.replace(/[^A-Za-z0-9]/g, '') }) }}
+                value={this.state.userName}
+                placeholderTextColor="gray"
+                maxLength={30}
+            />
+          </View>
+          <View style={[Regstyles.row,{marginTop: 10, height: 100,alignItems: 'center', justifyContent: 'center', display:"flex"}]}>
             <Picker
               selectedValue={this.state.code}
               style={[Regstyles.input,{backgroundColor: "lightgrey", height:50, width:100}]}
@@ -52,7 +72,7 @@ class Registration extends Component<{}, State> {
             </Picker>
             <TextInput style={[Regstyles.input,{backgroundColor: "white", height: 50, width:240}]}
                 placeholder="Phone"
-                onChange={(event) => { this.setState({ phone: event.nativeEvent.text }) }}
+                onChange={(event) => { this.setState({ phone: event.nativeEvent.text.replace(/[^0-9]/g, '') }) }}
                 value={this.state.phone}
                 placeholderTextColor="gray"
                 keyboardType="numeric"
@@ -71,7 +91,6 @@ class Registration extends Component<{}, State> {
 
 export const Regstyles = StyleSheet.create({
   input: {
-    marginTop: 50,
     height: 40,
     padding: 10,
   },
