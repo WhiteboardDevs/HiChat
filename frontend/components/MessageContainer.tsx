@@ -2,7 +2,7 @@ import React from "react";
 import { Component } from "react";
 import { FlatList, View, ListRenderItemInfo } from "react-native";
 import { Message } from "./Message";
-import { MessageType } from "./Constants";
+import { MessageType, MessageStatus } from "./Constants";
 
 
 type Props = {
@@ -26,7 +26,8 @@ class MessageContainer extends Component<Props, State> {
     return (
       <Message
         messageText={messageInfo.item.message}
-        isSelfMsg= {isSelfMsg}
+        isSelfMsg={isSelfMsg}
+        status={messageInfo.item.status}
       />
     );
   };

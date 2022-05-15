@@ -15,7 +15,7 @@ type State = {
   code: string,
 }
 
-class Registration extends Component<{}, State> {
+class Registration extends Component<{}, State> {  
   constructor(props: {}) {
     super(props);
     this.state = {

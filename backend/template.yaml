@@ -7,6 +7,12 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'content-type'"
+      AllowOrigin: "'*'"
+      AllowCredentials: "'*'"
 
 Resources:
   testFunction1:
@@ -23,17 +29,41 @@ Resources:
           Properties:
             Path: /func1
             Method: get
-  testFunction2:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  getRecipientMessages:
+    Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./testFunction2/
+      CodeUri: ./getRecipientMessages/
       Handler: app.handler
       Runtime: python3.9
       Architectures:
         - x86_64
       Events:
-        HelloWorld2:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+        GetRecipientMessages:
+          Type: Api
           Properties:
-            Path: /func2
-            Method: get
+            Path: /getRecipientMessages
+            Method: GET
+      Policies: 
+        - DynamoDBCrudPolicy:
+            TableName: 'Message'
+  sendMessage:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./sendMessage/
+      Handler: app.handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        SendMessage:
+          Type: Api
+          Properties:
+            Path: /sendMessage
+            Method: POST
+      Policies: 
+        - DynamoDBCrudPolicy:
+            TableName: 'Message'
+  
+      
+      
+

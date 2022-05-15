@@ -10,22 +10,20 @@ import { regStyles } from './styles/css';
 import { ChatPanel } from './components/ChatPanel';
 import { Registration } from './components/Registration';
 import { SearchContacts } from './components/SearchContacts';
+import { UserContext } from './components/UserContext';
 import { readData, removeData } from './services/AsyncStorage';
 // import { PhoneinputTest } from './components/PhoneinputTest';
 
-import { STORAGE_KEY_PHONE, TITLE_FONT_SIZE, SUB_TITLE_FONT_SIZE } from './components/Constants';
+import { STORAGE_KEY_USER, STORAGE_KEY_PHONE, TITLE_FONT_SIZE, SUB_TITLE_FONT_SIZE } from './components/Constants';
 
-const func1_url = "http://127.0.0.1:3000/func1";
-const func2_url = "http://127.0.0.1:3000/func2";
-
+// Do not remove the below import, required for crypto.randomValues implementation on native platforms
+import 'react-native-get-random-values';
 
 const Stack = createNativeStackNavigator();
 
 type State = {
   phoneNumber: string | undefined,
-  func1_resp: {},
-  func2_resp: {},
-  current: string,
+  userName: string | undefined
 };
 
 export default class App extends Component<{}, State> {
@@ -33,19 +31,19 @@ export default class App extends Component<{}, State> {
     super(props);
     this.state = {
       phoneNumber: "",
-      func1_resp: {},
-      func2_resp: {},
-      current: "",
+      userName: "",
     }
-    // const url = "https://gner4se1je.execute-api.ap-south-1.amazonaws.com/Prod/func1"
   }
 
   componentDidMount() {
     console.log("inside mount")
     readData(STORAGE_KEY_PHONE)
       .then((mphone) => { this.setState({ phoneNumber: mphone }) })
-      .catch(() => console.log("inside catch"))
-      .finally(() => console.log("inside finally"));
+      .catch(() => console.log("Failed to read phone number from async storage"))
+
+    readData(STORAGE_KEY_USER)
+      .then((user) => { this.setState({ userName: user }) })
+      .catch(() => console.log("Failed to read user name from async storage"))
 
     // axios.get(func1_url)
     // .then(response => this.setState({func1_resp: response.data}))
@@ -108,7 +106,7 @@ export default class App extends Component<{}, State> {
     return (
       /* IF ELSE condition 
       [If phone number exists in async storage then dispaly Home Screen else display Registration Screen] */
-      <>
+      <UserContext.Provider value={{userName: this.state.userName}}>
         {this.state.phoneNumber ?
           <NavigationContainer>
             <Stack.Navigator>
@@ -125,7 +123,7 @@ export default class App extends Component<{}, State> {
             </Stack.Navigator>
           </NavigationContainer>
         }
-      </>
+      </UserContext.Provider>
     );
   }
 }
