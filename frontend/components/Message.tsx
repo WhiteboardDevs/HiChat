@@ -2,25 +2,27 @@ import React from "react";
 import { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { MessageStatus } from "./Constants";
 
 
 type MessageProps = {
   messageText: string, 
-  isSelfMsg: boolean
+  isSelfMsg: boolean,
+  status?: MessageStatus
 }
 
-class Message extends Component<MessageProps, {}> {
-  constructor(props: MessageProps) {
-    super(props)
-  }
 
+class Message extends Component<MessageProps, {}> {
   render() {
     return (
       <View style={[styles.messageWrapper, this.props.isSelfMsg ? styles.selfMsgWrapper: styles.recipientMsgWrapper]}>
         <Text style={[this.props.isSelfMsg ? {} : styles.recipientMsgColor, styles.message]}>{this.props.messageText}</Text>
         <Text style={[styles.timeStamp, styles.messageStamp]}>11:42 PM</Text>
-        { this.props.isSelfMsg &&
-          <MaterialIcons name="done" style={[styles.messageStatus, styles.messageStamp]}/>
+        { this.props.isSelfMsg && 
+          <MaterialIcons 
+            name={ this.props.status == MessageStatus.Sent ? "done" : this.props.status == MessageStatus.Seen ? "done" : "pending" } 
+            style={[styles.messageStatus, styles.messageStamp]}
+          />
         }
       </View>);
   }

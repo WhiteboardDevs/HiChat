@@ -1,21 +1,18 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, View, TextInput, ViewStyle, Pressable } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { CHAT_BOX_MIN_HEIGHT, ICON_SIZE, FONT_SIZE } from "./Constants";
 
 
 type Props = {
   style?: ViewStyle
-  sendMessageHandler: (msg: string) => void
+  onNewMessage: (msg: string) => void
 }
 
 type State = {
   chatInput: string,
   height: number
 }
-
-const CHAT_BOX_MIN_HEIGHT = 64
-const ICON_SIZE = 36
-const FONT_SIZE = 16
 
 class ChatInputBox extends Component<Props, State> {
   constructor(props: Props) {
@@ -30,7 +27,7 @@ class ChatInputBox extends Component<Props, State> {
     let chatInput = this.state.chatInput.replace(/^\s+|\s+$/g, "")
     if (!chatInput) return;
     console.log('Sending message')
-    this.props.sendMessageHandler(chatInput)
+    this.props.onNewMessage(chatInput)
     this.setState({chatInput: ""})
   }
 
@@ -92,7 +89,6 @@ const styles = StyleSheet.create({
   iconColor: {
     color: "#a2acb4",
   }
-
 });
 
 
